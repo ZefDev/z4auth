@@ -70,7 +70,7 @@ class SocialController extends Controller
 
     public function VkCallback()
     {
-        $vkSocial = SocVk::driver('twitter')->user();
+        $vkSocial = SocVk::driver('vkontakte')->user();
         $users = User::where(['email' => $vkSocial->getEmail()])->first();
         if ($users) {
             Auth::login($users);
