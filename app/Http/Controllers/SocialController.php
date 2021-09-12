@@ -72,14 +72,19 @@ class SocialController extends Controller
     public function VkCallback()
     {
         $vkSocial = SocVk::driver('vkontakte')->user();
-        $users = User::where(['email' => $vkSocial->getEmail()])->first();
+        if ($vkSocial->getEmail()!=null) {
+            $users = User::where(['email' => $vkSocial->getEmail()])->first();
+        }
+        else{
+            $users = User::where(['provider_id' => $vkSocial->getId()])->first();
+        }
         if ($users) {
             Auth::login($users);
             return redirect('/home');
         } else {
             $user = User::firstOrCreate([
                 'name' => $vkSocial->getName(),
-                'email' => $vkSocial->getEmail(),
+                'email' => null,//$vkSocial->getEmail(),
                 'image' => $vkSocial->getAvatar(),
                 'provider_id' => $vkSocial->getId(),
                 'provider' => 'vk',

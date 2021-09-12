@@ -48,6 +48,7 @@
                                     <th>Registration</th>
                                     <th>Last login</th>
                                     <th>Provider</th>
+                                    <th>Provider_id</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
@@ -61,6 +62,7 @@
                                         <td>{{ $user->created_at }}</td>
                                         <td>{{ $user->updated_at }}</td>
                                         <td>{{ $user->provider }}</td>
+                                        <td>{{ $user->provider_id }}</td>
                                         <td>{{ $user->status }}</td>
                                     </tr>
                                 @endforeach
