@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 //use Socialite;
 //use \SocialiteProviders\Manager\ServiceProvider AS SocVk;
+use Laravel\Socialite\Facades\Socialite;
 use Auth;
 class SocialController extends Controller
 {
