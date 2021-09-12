@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Socialite;
-use \SocialiteProviders\Manager\ServiceProvider AS SocVk;
+//use Socialite;
+//use \SocialiteProviders\Manager\ServiceProvider AS SocVk;
 use Auth;
 class SocialController extends Controller
 {
@@ -13,7 +13,7 @@ class SocialController extends Controller
     public function redirect($provider)
     {
         if ($provider == 'vkontakte'){
-            return SocVk::driver($provider)->redirect();
+            return Socialite::driver($provider)->redirect();
         }
         return Socialite::driver($provider)->redirect();
     }
