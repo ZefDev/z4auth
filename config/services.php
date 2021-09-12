@@ -49,5 +49,10 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect'      => env('GOOGLE_URL'),
     ],
+    'vkontakte' => [
+        'client_id' => env('VKONTAKTE_CLIENT_ID'),
+        'client_secret' => env('VKONTAKTE_CLIENT_SECRET'),
+        'redirect' => env('VKONTAKTE_REDIRECT_URI')
+    ],
 
 ];
