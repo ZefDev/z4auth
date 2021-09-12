@@ -13,14 +13,13 @@ class SocialController extends Controller
 
     public function redirect($provider)
     {
-        if ($provider == 'vkontakte'){
-            return Socialite::driver($provider)->redirect();
-        }
         return Socialite::driver($provider)->redirect();
     }
     public function Callback($provider)
     {
-
+        if ($provider = 'vkontakte'){
+            $this->VkCallback();
+        }
         $userSocial = Socialite::driver($provider)->stateless()->user();
         $users = User::where(['email' => $userSocial->getEmail()])->first();
         if ($users) {

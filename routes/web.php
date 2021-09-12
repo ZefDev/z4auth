@@ -17,7 +17,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'indexWelcome']);
 
 Route::get('login/{provider}', [App\Http\Controllers\SocialController::class, 'redirect']);
 Route::get('login/{provider}/callback', [App\Http\Controllers\SocialController::class, 'Callback']);
-Route::get('login/{provider}/callback', [App\Http\Controllers\SocialController::class, 'Callback']);
 Route::get('login/twitter/callback', [App\Http\Controllers\SocialController::class, 'TwitterCallback']);
 Route::get('login/vkontakte/callback', [App\Http\Controllers\SocialController::class, 'VkCallback']);
 Auth::routes();
