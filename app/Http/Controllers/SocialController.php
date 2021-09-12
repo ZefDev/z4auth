@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Socialite;
+use Laravel\Socialite\Facades\Socialite AS SocVk;
 use Auth;
 class SocialController extends Controller
 {
 
     public function redirect($provider)
     {
+        if ($provider == 'vkontakte'){
+            return SocVk::driver($provider)->redirect();
+        }
         return Socialite::driver($provider)->redirect();
     }
     public function Callback($provider)
@@ -59,6 +63,25 @@ class SocialController extends Controller
                 'image'         => $twitterSocial->getAvatar(),
                 'provider_id'   => $twitterSocial->getId(),
                 'provider'      => 'twitter',
+            ]);
+            return redirect()->route('home');
+        }
+    }
+
+    public function VkCallback()
+    {
+        $vkSocial = SocVk::driver('twitter')->user();
+        $users = User::where(['email' => $vkSocial->getEmail()])->first();
+        if ($users) {
+            Auth::login($users);
+            return redirect('/home');
+        } else {
+            $user = User::firstOrCreate([
+                'name' => $vkSocial->getName(),
+                'email' => $vkSocial->getEmail(),
+                'image' => $vkSocial->getAvatar(),
+                'provider_id' => $vkSocial->getId(),
+                'provider' => 'vk',
             ]);
             return redirect()->route('home');
         }

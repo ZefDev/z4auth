@@ -19,6 +19,7 @@ Route::get('login/{provider}', [App\Http\Controllers\SocialController::class, 'r
 Route::get('login/{provider}/callback', [App\Http\Controllers\SocialController::class, 'Callback']);
 Route::get('login/{provider}/callback', [App\Http\Controllers\SocialController::class, 'Callback']);
 Route::get('login/twitter/callback', [App\Http\Controllers\SocialController::class, 'TwitterCallback']);
+Route::get('login/vkontakte/callback', [App\Http\Controllers\SocialController::class, 'VkCallback']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
