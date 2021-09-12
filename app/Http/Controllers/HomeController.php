@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -42,15 +42,16 @@ class HomeController extends Controller
      */
     public function indexWelcome()
     {
-        if (Auth::user()== null){
-            return redirect('login');
+        if (Auth::user()!= null){
+            $user =Auth::user();
+            $user->updated_at = date('Y-m-d G:i:s');
+            $user->save();
+            //return redirect('login');
+            if (!Auth::user()->status) {
+                return view('block');
+            }
         }
-        $user =Auth::user();
-        $user->updated_at = date('Y-m-d G:i:s');
-        $user->save();
-        if (!Auth::user()->status) {
-            return view('block');
-        }
+
         $social = [];
         $socials = User::select("provider")->distinct()->get()->toArray();
         $user = [];
